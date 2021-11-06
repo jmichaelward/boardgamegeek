@@ -11,8 +11,19 @@ class Request {
 		return '';
 	}
 
-	public function getCollection(): string {
-		return '';
+	public function getCollection( OptionsInterface $collection, $format = 'json' ): string {
+        $query = http_build_query( $user->get_options() );
+        $curl  = curl_init( self::BASE_URL . "/collection?{$query}" );
+
+        curl_setopt_array($curl, [
+            CURLOPT_RETURNTRANSFER => true,
+        ]);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        return $format === 'xml' ? $response : json_encode(simplexml_load_string($response));
 	}
 
 	public function getPlays(): string {
