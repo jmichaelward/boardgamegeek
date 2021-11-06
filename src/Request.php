@@ -4,8 +4,9 @@ namespace JMichaelWard\BoardGameGeek;
 
 use JMichaelWard\BoardGameGeek\User\User;
 
-class Request {
-	const BASE_URL = 'https://www.boardgamegeek.com/xmlapi2';
+class Request
+{
+    const BASE_URL = 'https://www.boardgamegeek.com/xmlapi2';
 
     /**
      * The response format to return.
@@ -20,7 +21,8 @@ class Request {
     /**
      * Sets the response format to XML.
      */
-    public function set_xml_format(): void {
+    public function set_xml_format(): void
+    {
         $this->format = 'xml';
     }
 
@@ -30,17 +32,20 @@ class Request {
      * @param string $response The XML response from the API request.
      * @return string
      */
-    private function get_parsed_response( string $response ): string {
+    private function get_parsed_response(string $response): string
+    {
         return $this->format === 'xml' ? $response : json_encode(simplexml_load_string($response));
     }
 
-	public function getHot(): string {
-		return '';
-	}
-
-	public function getCollection( OptionsInterface $collection ): string {
-        $query = http_build_query( $user->get_options() );
-        $curl  = curl_init( self::BASE_URL . "/collection?{$query}" );
+    /**
+     * Make a GET request.
+     *
+     * @param string $request_url
+     * @return bool|string
+     */
+    private function get(string $request_url)
+    {
+        $curl = curl_init($request_url);
 
         curl_setopt_array($curl, [
             CURLOPT_RETURNTRANSFER => true,
@@ -50,20 +55,37 @@ class Request {
 
         curl_close($curl);
 
+        return $response;
+    }
+
+    public function getHot(): string
+    {
+        return '';
+    }
+
+    public function getCollection(OptionsInterface $collection): string
+    {
+        $query       = http_build_query($collection->get_options());
+        $request_url = self::BASE_URL . "/collection?{$query}";
+        $response    = $this->get($request_url);
+
         return $this->get_parsed_response($response);
-	}
+    }
 
-	public function getPlays(): string {
-		return '';
-	}
+    public function getPlays(): string
+    {
+        return '';
+    }
 
-	public function getForumList(): string {
-		return '';
-	}
+    public function getForumList(): string
+    {
+        return '';
+    }
 
-	public function getGuilds(): string {
-		return '';
-	}
+    public function getGuilds(): string
+    {
+        return '';
+    }
 
     /**
      * Request user data.
@@ -71,18 +93,13 @@ class Request {
      * @param OptionsInterface $user
      * @return string
      */
-	public function getUser( OptionsInterface $user ): string {
-		$query = http_build_query( $user->get_options() );
-		$curl  = curl_init( self::BASE_URL . "/user?{$query}" );
+    public function getUser(OptionsInterface $user): string
+    {
+        $query       = http_build_query($user->get_options());
+        $request_url = self::BASE_URL . "/user/?{$query}";
 
-		curl_setopt_array($curl, [
-			CURLOPT_RETURNTRANSFER => true,
-		]);
+        $response = $this->get($request_url);
 
-		$response = curl_exec($curl);
-
-		curl_close($curl);
-
-		return $this->get_parsed_response($response);
-	}
+        return $this->get_parsed_response($response);
+    }
 }
