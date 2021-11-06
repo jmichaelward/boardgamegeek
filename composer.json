@@ -1,0 +1,19 @@
+{
+    "name": "jmichaelward/boardgamegeek",
+    "description": "A wrapper library for the BoardGameGeek XML API.",
+    "authors": [
+        {
+            "name": "Jeremy Ward",
+            "email": "jeremy@jmichaelward.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "JMichaelWard\\BoardGameGeek\\": "src/"
+        }
+    }
+}
