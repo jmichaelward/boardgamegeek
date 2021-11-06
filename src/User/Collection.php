@@ -35,7 +35,7 @@ class Collection implements OptionsInterface
         $this->username = $username;
     }
 
-    public function get_options(): array
+    public function getOptions(): array
     {
         return [
             'username' => $this->username,

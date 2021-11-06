@@ -42,7 +42,7 @@ class Plays implements OptionsInterface
      * @return array
      * @throws \Exception
      */
-    public function get_options(): array
+    public function getOptions(): array
     {
         if ( ! isset( $this->username ) && ! isset( $this->id ) ) {
             throw new \Exception( 'Plays require either a username or an ID.' );

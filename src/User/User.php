@@ -117,7 +117,7 @@ class User implements OptionsInterface
      *
      * @return array
      */
-    public function get_options(): array
+    public function getOptions(): array
     {
         $set_options = [
             'name'   => $this->name,

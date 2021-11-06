@@ -65,7 +65,7 @@ class Request
 
     public function getCollection(OptionsInterface $collection): string
     {
-        $query       = http_build_query($collection->get_options());
+        $query       = http_build_query($collection->getOptions());
         $request_url = self::BASE_URL . "/collection?{$query}";
         $response    = $this->get($request_url);
 
@@ -74,7 +74,7 @@ class Request
 
     public function getPlays(OptionsInterface $plays): string
     {
-        $query = http_build_query($plays->get_options());
+        $query = http_build_query($plays->getOptions());
         $request_url = self::BASE_URL . "/plays?{$query}";
         $response = $this->get($request_url);
 
@@ -99,7 +99,7 @@ class Request
      */
     public function getUser(OptionsInterface $user): string
     {
-        $query       = http_build_query($user->get_options());
+        $query       = http_build_query($user->getOptions());
         $request_url = self::BASE_URL . "/user/?{$query}";
 
         $response = $this->get($request_url);
