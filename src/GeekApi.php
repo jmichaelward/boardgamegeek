@@ -61,9 +61,13 @@ class GeekApi
         return $response;
     }
 
-    public function getHot(): string
+    public function getHot(OptionsInterface $hot): string
     {
-        return '';
+        $query = http_build_query($hot->getOptions());
+        $request_url = self::BASE_URL . "/hot?{$query}";
+        $response = $this->get($request_url);
+
+        return $this->getParsedResponse($response);
     }
 
     public function getCollection(OptionsInterface $collection): string
