@@ -2,6 +2,8 @@
 
 namespace JMichaelWard\BoardGameGeek;
 
+use JMichaelWard\BoardGameGeek\User\User;
+
 class Request {
 	const BASE_URL = 'https://www.boardgamegeek.com/xmlapi2';
 
@@ -25,15 +27,24 @@ class Request {
 		return '';
 	}
 
-	public function getUser( $username ): string {
-		$curl = curl_init(self::BASE_URL . '/user' );
+    /**
+     * Request user data.
+     *
+     * @param OptionsInterface $user
+     * @return string
+     */
+	public function getUser( OptionsInterface $user, $format = 'json' ): string {
+		$query = http_build_query( $user->get_options() );
+		$curl  = curl_init( self::BASE_URL . "/user?{$query}" );
 
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true );
+		curl_setopt_array($curl, [
+			CURLOPT_RETURNTRANSFER => true,
+		]);
 
 		$response = curl_exec($curl);
 
 		curl_close($curl);
 
-		return json_encode(simplexml_load_string($response));
+		return $format === 'xml' ? $response : json_encode(simplexml_load_string($response));
 	}
 }
