@@ -4,7 +4,10 @@ namespace JMichaelWard\BoardGameGeek;
 
 use JMichaelWard\BoardGameGeek\User\User;
 
-class Request
+/**
+ * Wrapper class for the BoardGameGeek API.
+ */
+class GeekApi
 {
     const BASE_URL = 'https://www.boardgamegeek.com/xmlapi2';
 
