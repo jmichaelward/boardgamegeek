@@ -72,9 +72,13 @@ class Request
         return $this->get_parsed_response($response);
     }
 
-    public function getPlays(): string
+    public function getPlays(OptionsInterface $plays): string
     {
-        return '';
+        $query = http_build_query($plays->get_options());
+        $request_url = self::BASE_URL . "/plays?{$query}";
+        $response = $this->get($request_url);
+
+        return $this->get_parsed_response($response);
     }
 
     public function getForumList(): string
