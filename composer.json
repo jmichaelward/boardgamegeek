@@ -9,7 +9,8 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "ext-simplexml": "*"
     },
     "autoload": {
         "psr-4": {
