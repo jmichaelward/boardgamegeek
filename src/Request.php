@@ -32,7 +32,7 @@ class Request
      * @param string $response The XML response from the API request.
      * @return string
      */
-    private function get_parsed_response(string $response): string
+    private function getParsedResponse(string $response): string
     {
         return $this->format === 'xml' ? $response : json_encode(simplexml_load_string($response));
     }
@@ -69,7 +69,7 @@ class Request
         $request_url = self::BASE_URL . "/collection?{$query}";
         $response    = $this->get($request_url);
 
-        return $this->get_parsed_response($response);
+        return $this->getParsedResponse($response);
     }
 
     public function getPlays(OptionsInterface $plays): string
@@ -78,7 +78,7 @@ class Request
         $request_url = self::BASE_URL . "/plays?{$query}";
         $response = $this->get($request_url);
 
-        return $this->get_parsed_response($response);
+        return $this->getParsedResponse($response);
     }
 
     public function getForumList(): string
@@ -104,6 +104,6 @@ class Request
 
         $response = $this->get($request_url);
 
-        return $this->get_parsed_response($response);
+        return $this->getParsedResponse($response);
     }
 }

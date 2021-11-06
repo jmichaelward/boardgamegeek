@@ -59,35 +59,35 @@ class User implements OptionsInterface
         $this->name = $username;
     }
 
-    public function set_buddies(): User
+    public function setBuddies(): User
     {
         $this->buddies = 1;
 
         return $this;
     }
 
-    public function set_guilds(): User
+    public function setGuilds(): User
     {
         $this->guilds = 1;
 
         return $this;
     }
 
-    public function set_hot(): User
+    public function setHot(): User
     {
         $this->hot = 1;
 
         return $this;
     }
 
-    public function set_top(): User
+    public function setTop(): User
     {
         $this->top = 1;
 
         return $this;
     }
 
-    public function set_domain(string $domain)
+    public function setDomain(string $domain)
     {
         if (!in_array($domain, ['boardgame', 'rpg', 'videogame']))
         {
@@ -104,12 +104,12 @@ class User implements OptionsInterface
      *
      * @return User
      */
-    public function set_all_options(): User
+    public function setAllOptions(): User
     {
-        return $this->set_buddies()
-            ->set_guilds()
-            ->set_hot()
-            ->set_top();
+        return $this->setBuddies()
+            ->setGuilds()
+            ->setHot()
+            ->setTop();
     }
 
     /**
